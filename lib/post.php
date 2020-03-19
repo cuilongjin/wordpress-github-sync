@@ -97,10 +97,10 @@ class WordPress_GitHub_Sync_Post {
 	}
 
 	/**
-	 * Returns the post name
+	 * Returns the post title
 	 */
 	public function name() {
-		return $this->post->post_name;
+		return $this->post->post_title;
 	}
 
 	/**
@@ -144,6 +144,8 @@ class WordPress_GitHub_Sync_Post {
 			if ( WPCom_Markdown::get_instance()->is_markdown( $this->post->ID ) ) {
 				$content = $this->post->post_content_filtered;
 			}
+		} else if (class_exists( 'Githuber' )) {
+			$content = $this->post->post_content_filtered;
 		}
 
 		return apply_filters( 'wpghs_content_export', $content, $this );
